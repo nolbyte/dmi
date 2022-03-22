@@ -1,0 +1,7 @@
+{
+    "require": {
+        "ramsey/uuid": "^4.1",
+        "wixel/gump": "^1.12",
+        "phpoffice/phpspreadsheet": "^1.18"
+    }
+}
