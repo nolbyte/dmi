@@ -6,9 +6,9 @@ include('phpmailer/mail.php');
 
 //online
 $host     = "localhost"; // Host name
-$username = "mmc-mhd"; // Mysql username
-$password = "Karehol*7$$"; // Mysql password
-$db_name  = "nolbyte"; // Database name
+$username = "localhost"; // Mysql username
+$password = "123654"; // Mysql password
+$db_name  = "userna"; // Database name
 $charset  = 'utf8mb4';
 
 // Connect to server and select databse.
