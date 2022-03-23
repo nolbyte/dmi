@@ -159,229 +159,70 @@ if ($csrf->check_valid('post')) {
 }
 ?>
 
-<main class="container py-4">
+<main class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow">
-                <div class="bg-dark">
-                    <img src="assets/img/dmi.png" class="card-img-top" alt="Dewan Mesjid Indonesia" style="max-width:600px">
+        <div class="col-md-8 px-0">
+            <img class="img-fluid" src="assets/img/istiqlal5.jpg">
+        </div>
+        <div class="col-md-4 g-3">
+            <div class="d-flex">
+                <div class="flex-grow-1 p-3">
+                    <p class="text-end">SELF ASSESSMENT DMI AWARD 2022<br>
+                        <a style="text-decoration: none;" href="#" onclick="show('register');">daftar sekarang</a>
+                    </p>
                 </div>
-                <div class="card-body">
-                    <h3 class="text-center mb-5">SELF ASSESSMENT - ANGKET PENILAIAN MANDIRI DMI AWARD</h3>
-                    <div class="col-md-6">
-                        <?php
-                        if (isset($error)) {
-                        ?>
-                            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                <div>
-                                    <h5>Kesalahan ditemukan</h5>
-                                    <?php
-                                    foreach ($error as $row) {
-                                        echo $row . '<br>';
-                                    }
-                                    ?>
-                                    <meta http-equiv="refresh" content="125">
-                                </div>
-                            </div>
-                        <?php
-                        } else {
-                        ?>
-                            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                <div>
-                                    kolom bertanda * wajib diisi
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                <div class="me-3">
+                    <img class="img-fluid" src="assets/img/logo-dmi-award.png" style="max-width: 80px;">
+                </div>
+            </div>
+            <div id="login" class="mt-3 mb-4">
+                <h6 class="text-info text-center">Sign In Self Assessment Mesjid</h6>
+                <form method="post" action="">
+                    <input type="hidden" name="<?= $token_id ?>" value="<?= $token_value ?>">
+                    <div class="mb-3 mx-5">
+                        <input type="text" name="usernamae" class="form-control" placeholder="username" required>
                     </div>
-                    <form method="post" action="" enctype="multipart/form-data" onSubmit="return validate();">
-                        <input type="hidden" name="<?= $token_id ?>" value="<?= $token_value ?>">
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Nama Masjid/Mushola <span class="text-danger">*</span></label>
-                            <input type="text" name="nama_mesjid" class="form-control" required>
+                    <div class="mb-3 mx-5">
+                        <input type="password" name="password" class="form-control" placeholder="password" id="password" data-toggle="password" autocomplete="current-password" required>
+                    </div>
+                    <div class="d-flex mx-5">
+                        <div class="flex-grow-1 p-1">
+                            <a style="text-decoration: none" href="">Lupa Password?</a>
                         </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Kategori Mesjid <span class="text-danger">*</span></label>
-                            <select name="kategori" class="form-select" required>
-                                <option value="">--Pilih Kategori--</option>
-                                <?php
-                                $sql = $db->prepare("SELECT * FROM dm_kategori");
-                                $sql->execute();
-                                foreach ($sql->fetchAll() as $row) {
-                                    echo '<option value="' . $row['kategori_id'] . '">' . $row['kategori_nama'] . '</option>';
-                                }
-                                ?>
-                            </select>
+                        <div>
+                            <button type="submit" class="btn btn-sm btn-success"><i class="bi-lock"></i> Sign In</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Alamat Jalan / Gang <span class="text-danger">*</span></label>
-                            <input type="text" name="alamat" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div id="register" class="mt-3 mb-4" style="display: none;">
+                <h6 class="text-info text-center">Sign Up Self Assessment Mesjid</h6>
+                <form method="post" action="">
+                    <input type="hidden" name="<?= $token_id ?>" value="<?= $token_value ?>">
+                    <div class="mb-3 mx-5">
+                        <input type="text" name="pengurus" class="form-control" placeholder="Nama Pengurus/DKM" required>
+                    </div>
+                    <div class="mb-3 mx-5">
+                        <input type="text" name="nama_mesjid" class="form-control" placeholder="Nama Mesjid" required>
+                    </div>
+                    <div class="mb-3 mx-5">
+                        <input type="number" name="hp_pengurus" class="form-control" placeholder="HP Pengurus, Format 628xxx" required>
+                    </div>
+                    <div class="mb-3 mx-5">
+                        <input type="email" name="email_pengurus" class="form-control" placeholder="Email Pengurus" required>
+                    </div>
+                    <div class="mb-3 mx-5">
+                        <input type="password" name="password" class="form-control" placeholder="password, minimal 8 karakter" pattern=".{8,}" id="password" data-toggle="password" autocomplete="new-password" title="Password minimal 8 karakter" required>
+                    </div>
+                    <div class="d-flex mx-5">
+                        <div class="flex-grow-1 p-1">
+                            <a style="text-decoration: none" href="#" onclick="show('login');">Sign In</a>
                         </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">RT <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control w-25" name="rt" required>
+                        <div>
+                            <button type="submit" class="btn btn-sm btn-success"><i class="bi-lock"></i> Sign Up</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">RW <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control w-25" name="rw" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Desa/Kelurahan <span class="text-danger">*</span></label>
-                            <input type="text" name="desa" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Kecamatan <span class="text-danger">*</span></label>
-                            <input type="text" name="kecamatan" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Kabupaten/Kota <span class="text-danger">*</span></label>
-                            <input type="text" name="kabupaten" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Provinsi <span class="text-danger">*</span></label>
-                            <input type="text" name="provinsi" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Nama Penilai (Perwakilan Pengurus/DKM) <span class="text-danger">*</span></label>
-                            <input type="text" name="pic" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Alamat Email Penilai <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" name="pic_email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Nomor HP Penilai <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="pic_hp" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Nama Ketua Pengurus Mesjid/DKM <span class="text-danger">*</span></label>
-                            <input type="text" name="ketua" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Nomor HP Ketua Pengurus Mesjid/DKM <span class="text-danger">*</span></label>
-                            <input type="number" name="ketua_hp" class="form-control" required>
-                        </div>
-                        <div class="alert alert-info">
-                            <ol>
-                                <li>
-                                    Untuk mengetahui tingkat penilaian masjid/musholla, maka diharapkan anda mengisi angket ini dengan jujur dan apa adanya, serta disertakan bukti atau informasi akurat lainnya.
-                                </li>
-                                <li>
-                                    Untuk kolom “Bukti Pendukung * (Nama Program / Kegiatan/ Dokumen/ Sertifikat)”, anda mengisi/upload dengan lengkap nama program/kegiatan/dokumen pendukungnya.
-                                </li>
-                                <li>Dokumen pendukung yang diupload berupa berkas PDF</li>
-                            </ol>
-                        </div>
-                        <div class="table-responsive mb-3">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Kriteria Penilaian</th>
-                                        <th>Keterangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $sql = $db->prepare("SELECT * FROM dm_kriteria");
-                                    $sql->execute();
-                                    foreach ($sql->fetchAll() as $row) {
-                                    ?>
-                                        <tr>
-                                            <td><?= $row['kriteria_nama'] ?></td>
-                                            <td><?= $row['kriteria_keterangan'] ?></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="alert alert-danger">
-                            Silahkan pilih kriteria penilaian di bawah sesuai dengan aspek pernyataan yang tersedia, sertakan bukti jika ada dengan mengupload berkas PDF dengan ukuran maksimal 5MB.
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center align-middle">Nomor</th>
-                                        <th class="w-50 text-center align-middle">Pernyataan/Aspek</th>
-                                        <th class="text-center align-middle">Penilaian</th>
-                                        <th class="text-center align-middle">Bukti Pendukung<br>(Nama Program / Kegiatan/ Dokumen / Sertifikat)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="bg-warning">Contoh<br>No.1</td>
-                                        <td class="bg-warning">
-                                            Struktur organisasi yang dilengkapi dengan uraian kerja (Job Description) dan penempatan pengurus yang sesuai dengan tuntutan kompetensinya.
-                                        </td>
-                                        <td class="bg-warning">
-                                            3.DITERAPKAN & SEBAGIAN
-                                        </td>
-                                        <td class="bg-warning">
-                                            1.a. Struktur Organisasi sejak 2015 hingga sekarang. (Belum ada Uraian kerja & penempatan sesuai kompetensinya )
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-warning">Contoh<br>No.22</td>
-                                        <td class="bg-warning">
-                                            Terselenggaranya kepengurusan khusus & kegiatan terkait masjid ramah anak.
-                                        </td>
-                                        <td class="bg-warning">
-                                            4.KONSISTEN & LEBIH
-                                        </td>
-                                        <td class="bg-warning">
-                                            22.a. Struktur Kepengurusan/ Panitia Program Ramah Anak. 22.b. Laporan pelaksanaan program masjid ramah anak yang sudah berjalan 4 tahun.
-                                        </td>
-                                    </tr>
-                                    <?php
-                                    $sql = $db->prepare("SELECT * FROM dm_aspek");
-                                    $sql->execute();
-                                    $no = 1;
-                                    foreach ($sql->fetchAll() as $row) {
-                                    ?>
-                                        <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><input type="hidden" name="aspek[]" value="<?= $row['aspek_id'] ?>"><?= $row['aspek_nama'] ?></td>
-                                            <td>
-                                                <select name="nilai[]" class="form-select" required>
-                                                    <?php
-                                                    $sql = $db->prepare("SELECT * FROM dm_kriteria ORDER BY kriteria_id ASC");
-                                                    $sql->execute();
-                                                    foreach ($sql->fetchAll() as $row) {
-                                                        echo '<option value="' . $row['kriteria_poin'] . '">' . $row['kriteria_nama'] . '</option>';
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <textarea name="bukti" class="form-control" required></textarea>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td colspan="2">Link Google Drive</td>
-                                        <td colspan="2">
-                                            <input type="text" class="form-control" name="link_gdrive" required>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input class="form-check-input" type="checkbox" value="" required>
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Demikian penilaian mandiri yang telah diisi dengan jujur dan apa adanya, apabila dikemudian hari ada hal-hal yang perlu di konfirmasikan kembali, maka kami siap menyertakan bukti atau informasi detail lainnya serta akan membantu proses pengecekan / observasi langsung (bila dibutuhkan).
-                            </label>
-                        </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-sm btn-success" id="kirim"><i class="bi-upload"></i> Kirim Penilaian</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

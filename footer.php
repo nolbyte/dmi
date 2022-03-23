@@ -4,18 +4,28 @@
     </div>
 </footer>
 <script type="text/javascript">
-    $('#file').on('change', function() {
-        const size =
-            (this.files[0].size / 1024 / 1024).toFixed(2);
+    var divs = ["login", "register"];
+    var visibleId = null;
 
-        if (size > 7) {
-            alert("Maksimal ukuran berkas yang boleh diupload hanya 7MB");
-            window.location.href = 'index.php';
-        } else {
-            $("#output").html('<b>' +
-                'Ukuran berkas ini: ' + size + " MB" + '</b>');
+    function show(id) {
+        if (visibleId !== id) {
+            visibleId = id;
         }
-    });
+        hide();
+    }
+
+    function hide() {
+        var div, i, id;
+        for (i = 0; i < divs.length; i++) {
+            id = divs[i];
+            div = document.getElementById(id);
+            if (visibleId === id) {
+                div.style.display = "block";
+            } else {
+                div.style.display = "none";
+            }
+        }
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
